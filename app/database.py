@@ -1,20 +1,57 @@
 import mysql.connector
 from mysql.connector import Error
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # Load biến môi trường từ .env
+env_password = os.getenv("DB_PASSWORD")
+# def create_connection():
+#     """Tạo kết nối đến cơ sở dữ liệu MySQL"""
+#     try:
+#         conn = mysql.connector.connect(
+#             host="localhost",  # Địa chỉ máy chủ MySQL
+#             user="root",       # Tên người dùng MySQL
+#             password="123456",  # Mật khẩu người dùng MySQL
+#             database="pbl6"    # Tên cơ sở dữ liệu MySQL
+#         )
+#         return conn
+#     except Error as e:
+#         print(f"Lỗi khi tạo kết nối: {e}")
+#         return None
+    
 def create_connection():
-    """Tạo kết nối đến cơ sở dữ liệu MySQL"""
+    """Tạo kết nối đến cơ sở dữ liệu Aiven MySQL"""
     try:
         conn = mysql.connector.connect(
-            host="localhost",  # Địa chỉ máy chủ MySQL
-            user="root",       # Tên người dùng MySQL
-            password="123456",  # Mật khẩu người dùng MySQL
-            database="pbl6"    # Tên cơ sở dữ liệu MySQL
+            host="mysql-243c1f7-thaohiennhan2012-0061.g.aivencloud.com",  # Host từ Aiven
+            port=13627,  # Port từ Aiven
+            user="avnadmin",  # User từ Aiven
+            password=os.getenv("DB_PASSWORD"),  # Mật khẩu từ Aiven
+            database="defaultdb",  # Database từ Aiven
+            ssl_mode="REQUIRED"  # Bật SSL Mode
         )
+        print("Kết nối thành công đến Aiven MySQL!")
         return conn
     except Error as e:
         print(f"Lỗi khi tạo kết nối: {e}")
         return None
 
+def create_connection():
+    """Tạo kết nối đến cơ sở dữ liệu Aiven MySQL"""
+    try:
+        conn = mysql.connector.connect(
+            host="mysql-243c1f7-thaohiennhan2012-0061.g.aivencloud.com",  # Host từ Aiven
+            port=13627,  # Port từ Aiven
+            user="avnadmin",  # User từ Aiven
+            password= env_password,  # Mật khẩu từ Aiven
+            database="defaultdb",  # Database từ Aiven
+            ssl_mode="REQUIRED"  # Bật SSL Mode
+        )
+        print("Kết nối thành công đến Aiven MySQL!")
+        return conn
+    except Error as e:
+        print(f"Lỗi khi tạo kết nối: {e}")
+        return None
 
 def check_connection():
     """Kiểm tra kết nối cơ sở dữ liệu"""
