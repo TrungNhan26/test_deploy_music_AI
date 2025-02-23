@@ -8,7 +8,7 @@ app = FastAPI(title="Music Generation API")
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Hoặc ["http://127.0.0.1:5501"] nếu muốn giới hạn
+    allow_origins=["http://muzik.log.vn"],  # Hoặc ["http://127.0.0.1:5501"] nếu muốn giới hạn
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
